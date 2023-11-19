@@ -1,0 +1,9 @@
+- search about how to use json file ?
+
+- there are 52 IDs, each one assigned to an artist
+
+- use struct to store the informations from the json file
+
+- then transfer the information into the html
+
+فتيات القوة can do it! <3
