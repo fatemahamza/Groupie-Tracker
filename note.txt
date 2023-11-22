@@ -6,4 +6,6 @@
 
 - then transfer the information into the html
 
+- unmarshall the api
+
 فتيات القوة can do it! <3
