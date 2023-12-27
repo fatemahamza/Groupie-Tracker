@@ -17,14 +17,21 @@ type Artists struct {
 
 func GetArtists() {
 	url := "https://groupietrackers.herokuapp.com/api/artists"
-
-	var artists Artists
-
+	var artists []Artists
 	err := GetJson(url, &artists)
 	if err != nil {
 		fmt.Printf("Error getting Artist info: %s\n", err.Error())
-	} else {
-		fmt.Printf("Here is your artist name: %s\n", artists.Name)
+		return
+	}
+
+	fmt.Println("Here are the artist members:")
+	for _, artist := range artists {
+		fmt.Printf("Artist: %s\n", artist.Name)
+		fmt.Println("Members:")
+		for _, member := range artist.Members {
+			fmt.Println(member)
+		}
+		fmt.Println()
 	}
 }
 
@@ -33,22 +40,24 @@ func GetJson(url string, target interface{}) error {
 	if err != nil {
 		return err
 	}
-
 	defer resp.Body.Close()
-
 	return json.NewDecoder(resp.Body).Decode(target)
 }
 
+func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	GetArtists()
+	//json.NewEncoder(w).Encode(artists)
+}
+
 func main() {
+	client = &http.Client{} // Initialize the HTTP client
 
-	var artists Artists
+	http.HandleFunc("/artists", ArtistHandler)
 
-	url := "https://groupietrackers.herokuapp.com/api/artists"
-	err := GetJson(url, &artists)
+	fmt.Println("Server is running on: 8080")
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		fmt.Printf("Error getting Artist info: %s\n", err.Error())
-		return
+		fmt.Printf("error starting server")
 	}
-
-	fmt.Printf("Here is your artist name: %s\n", artists.Name)
+	GetArtists()
 }
