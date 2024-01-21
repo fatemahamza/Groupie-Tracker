@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/style.css" rel="stylesheet" > 
+    <title>Groupie tracker</title>
+</head>
+<body>
+    <div id="artists-container">
+        {{range .}}
+            <div class="artist-box" id="{{.Name}}">
+                <h1>{{.Name}}</h1>
+                <img src="{{.Image}}" width="250" height="250">
+                <!-- <ul>
+                    {{range .Members}}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ul>
+                <div class="tour-info">
+                    {{range $location, $dates := .DatesLocations}}
+                        <h3>{{$location}}</h3>
+                        <ul>
+                            {{range $dates}}
+                                <li>{{.}}</li>
+                            {{end}}
+                        </ul>
+                    {{end}}
+                </div>
+            </div> -->
+        {{end}}
+    </div>
+</body>
+</html>

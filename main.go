@@ -1,63 +1,36 @@
 package main
-
 import (
-	"encoding/json"
-	"fmt"
+	"groupie-tracker/apimanager"
+	"log"
 	"net/http"
+	"text/template"
 )
-
-var client *http.Client
-
-type Artists struct {
-	ID      int      `json:"id"`
-	Image   string   `json:"image"`
-	Name    string   `json:"name"`
-	Members []string `json:"members"`
+var templates *template.Template
+func init() {
+	// Initialize templates during package initialization
+	templates = template.Must(template.ParseGlob("templates/*.html"))
 }
-
-func GetArtists() {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
-	var artists []Artists
-	err := GetJson(url, &artists)
+func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	artists, err := apimanager.GetArtists()
 	if err != nil {
-		fmt.Printf("Error getting Artist info: %s\n", err.Error())
+		log.Printf("Error getting artists: %s", err.Error())
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-
-	fmt.Println("Here are the artist members:")
-	for _, artist := range artists {
-		fmt.Printf("Artist: %s\n", artist.Name)
-		fmt.Println("Members:")
-		for _, member := range artist.Members {
-			fmt.Println(member)
-		}
-		fmt.Println()
-	}
-}
-
-func GetJson(url string, target interface{}) error {
-	resp, err := client.Get(url)
+	err = templates.ExecuteTemplate(w, "artists.html", artists)
 	if err != nil {
-		return err
+		log.Printf("Error executing template: %s", err.Error())
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
-	defer resp.Body.Close()
-	return json.NewDecoder(resp.Body).Decode(target)
 }
-
-func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	GetArtists()
-	//json.NewEncoder(w).Encode(artists)
-}
-
 func main() {
-	client = &http.Client{} // Initialize the HTTP client
-
-	http.HandleFunc("/artists", ArtistHandler)
-
-	fmt.Println("Server is running on: 8080")
-	err := http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.HandleFunc("/", ArtistHandler)
+	log.Println("Serving on http://localhost:8080")
+	err := http.ListenAndServe(":8080", mux)
 	if err != nil {
-		fmt.Printf("error starting server")
+		log.Println("Error starting server:", err)
 	}
-	GetArtists()
 }
