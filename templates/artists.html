@@ -7,11 +7,14 @@
     <title>Groupie tracker</title>
 </head>
 <body>
-    <div id="artists-container">
+   <div class="header">
+    <h1>Groupie Tracker</h1></div>
+    <div id="artists-container" class="container">
         {{range .}}
             <div class="artist-box" id="{{.Name}}">
-                <h1>{{.Name}}</h1>
+                <h3>{{.Name}}</h3>
                 <img src="{{.Image}}" width="250" height="250">
+                <br></br>
                 <button class="show-details">
                     Show details
                 </button>
@@ -33,22 +36,5 @@
             </div> -->
         {{end}}
     </div>
-    <style>
-        .show-details {
-            background-color: rgb(39, 71, 131);
-            color: rgb(240, 255, 211);
-            height: 36px;
-            width: 110px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 18px;
-            transition: background-color 0.5s;
-         }
-
-         .show-details:hover {
-            background-color: rgb(69, 91, 134);
-         }
-    </style>
 </body>
 </html>

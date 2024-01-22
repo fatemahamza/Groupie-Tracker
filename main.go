@@ -12,6 +12,12 @@ func init() {
 }
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	artists, err := apimanager.GetArtists()
+
+	if r.URL.Path != "/" {
+		http.Error(w, "404 Page Not Found", http.StatusNotFound)
+		return
+	}
+
 	if err != nil {
 		log.Printf("Error getting artists: %s", err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

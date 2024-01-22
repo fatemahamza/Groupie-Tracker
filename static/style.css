@@ -1,3 +1,45 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 body {
-    background-color: lightblue;
-  }
+  background-color: rgb(32,42,68);
+}
+.show-details {
+  background-color: rgb(35, 64, 119);
+  color: rgb(240, 255, 211);
+  height: 36px;
+  width: 150px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 18px;
+  transition: background-color 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+}
+.show-details:hover {
+  background-color: rgb(69, 91, 134);
+}
+.show-details:active {
+  background-color: rgb(128, 193, 205);
+}
+.artist-box{
+  font-family: 'Courier New', Courier, monospace;
+  color: rgb(101, 74, 48);
+  font-size: 20px;
+  text-align: center;
+  height: 400px;
+  width: 400px;
+  margin: 50px auto;
+  margin-top: 50px;
+  border-radius:15px;
+ background: rgb(234, 224, 200);
+}
+.header {
+  font-size: 30px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  color:rgb(128, 193, 205)
+}
