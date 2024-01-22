@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="/static/details.css" rel="stylesheet" >  -->
+    <title>Groupie tracker</title>
+</head>
+
+<body>
+    <h1>details</h1>
+
+    <button class="home-button">Home</button>
+
+    <script>
+        // If there is only one element with the class 'home-button', you can use querySelector
+        document.querySelector('.home-button').addEventListener('click', function() {
+            window.location.href = 'artists.html';
+        });
+    </script>
+</body>
+
+<style>
+    body {
+        background-color: rgb(32,42,68);
+    }
+
+    .home-button {
+        background-color: rgb(35, 64, 119);
+        color: rgb(240, 255, 211);
+        height: 36px;
+        width: 100px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 18px;
+        transition: background-color 0.5s;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .home-button:hover {
+        background-color: rgb(69, 91, 134);
+    }
+
+    .home-button:active {
+        background-color: rgb(128, 193, 205);
+    }
+
+    h1 {
+        font-size: 30px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bolder;
+        color: rgb(128, 193, 205);
+    }
+</style>
+</html>

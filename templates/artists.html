@@ -18,23 +18,20 @@
                 <button class="show-details">
                     Show details
                 </button>
-                <!-- <ul>
-                    {{range .Members}}
-                        <li>{{.}}</li>
-                    {{end}}
-                </ul>
-                <div class="tour-info">
-                    {{range $location, $dates := .DatesLocations}}
-                        <h3>{{$location}}</h3>
-                        <ul>
-                            {{range $dates}}
-                                <li>{{.}}</li>
-                            {{end}}
-                        </ul>
-                    {{end}}
-                </div>
-            </div> -->
+            </div>
         {{end}}
     </div>
+
+    <script>
+        // Get all elements with class 'show-details'
+        var buttons = document.getElementsByClassName('show-details');
+        
+        // Iterate over the collection and add event listener to each button
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function() {
+                window.location.href = '/details.html';
+            });
+        }
+    </script>
 </body>
 </html>
