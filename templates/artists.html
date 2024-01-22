@@ -15,23 +15,28 @@
                 <h3>{{.Name}}</h3>
                 <img src="{{.Image}}" width="250" height="250">
                 <br></br>
-                <button class="show-details">
-                    Show details
-                </button>
+                <a href="details.html" target="details">
+                    <button class="show-details">
+                        Show details
+                    </button>
+                </a>
             </div>
         {{end}}
     </div>
 
-    <script>
+    <!-- <script>
         // Get all elements with class 'show-details'
         var buttons = document.getElementsByClassName('show-details');
         
         // Iterate over the collection and add event listener to each button
         for (var i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', function() {
-                window.location.href = '/details.html';
-            });
+            // buttons[i].addEventListener('click', function() {
+            //     window.location.href = 'templates/details.html';
+            // });
+            <a href="details.html">
+                buttons
+                </a>
         }
-    </script>
+    </script> -->
 </body>
 </html>

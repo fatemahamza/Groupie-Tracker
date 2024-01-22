@@ -12,11 +12,39 @@ func init() {
 }
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	artists, err := apimanager.GetArtists()
+	// details, err := apimanager.GetArtists()
 
-	// if r.URL.Path != "/" {
-	// 	http.Error(w, "404 Page Not Found", http.StatusNotFound)
-	// 	return
-	// }
+	if r.URL.Path == "/details.html" {
+		// if err != nil {
+		// 	log.Printf("Error getting details: %s", err.Error())
+		// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		// 	return
+		// }
+		// err = templates.ExecuteTemplate(w, "details.html", details)
+		// if err != nil {
+		// 	log.Printf("Error executing template: %s", err.Error())
+		// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		// 	return
+		// }
+		http.ServeFile(w, r, "./templates/details.html")
+		return
+	} else if r.URL.Path != "/artist.html" || {
+		log.Printf("Error finding page: %s", err.Error())
+		http.Error(w, "404 page not found", http.StatusNotFound)
+		return
+	}
+
+		// if err != nil {
+		// 	log.Printf("Error getting artists: %s", err.Error())
+		// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		// 	return
+		// }
+		// err = templates.ExecuteTemplate(w, "artists.html", artists)
+		// if err != nil {
+		// 	log.Printf("Error executing template: %s", err.Error())
+		// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		// 	return
+		// }
 
 	if err != nil {
 		log.Printf("Error getting artists: %s", err.Error())
