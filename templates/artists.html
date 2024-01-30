@@ -4,39 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/style.css" rel="stylesheet" > 
+    <script src="/static/jvs.js"></script>
     <title>Groupie tracker</title>
 </head>
 <body>
-   <div class="header">
-    <h1>Groupie Tracker</h1></div>
+    <div class="header">
+        <h1>Groupie Tracker</h1>
+    </div>
     <div id="artists-container" class="container">
         {{range .}}
-            <div class="artist-box" id="{{.Name}}">
-                <h3>{{.Name}}</h3>
-                <img src="{{.Image}}" width="250" height="250">
-                <br></br>
-                <a href="details.html" target="details">
-                    <button class="show-details">
-                        Show details
-                    </button>
-                </a>
+            <div class="artist">
+                <img src="{{.Image}}" width="250" height="250" alt="{{.Name}}">
+                <div class="details" id="{{.Name}}">
+                    <h2>{{.Name}}</h2>
+                    <button class="show-more" onclick="show('{{.Name}}')">Show more</button>
+                </div>
             </div>
         {{end}}
     </div>
-
-    <!-- <script>
-        // Get all elements with class 'show-details'
-        var buttons = document.getElementsByClassName('show-details');
-        
-        // Iterate over the collection and add event listener to each button
-        for (var i = 0; i < buttons.length; i++) {
-            // buttons[i].addEventListener('click', function() {
-            //     window.location.href = 'templates/details.html';
-            // });
-            <a href="details.html">
-                buttons
-                </a>
-        }
-    </script> -->
 </body>
 </html>
