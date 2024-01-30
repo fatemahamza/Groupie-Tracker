@@ -1,26 +1,31 @@
 package main
+
 import (
 	"groupie-tracker/apimanager"
 	"log"
 	"net/http"
 	"text/template"
 )
+
 var templates *template.Template
+var FullArtists []apimanager.Artists
+
 func init() {
 	// Initialize templates during package initialization
 	templates = template.Must(template.ParseGlob("templates/*.html"))
-}
-func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	artists, err := apimanager.GetArtists()
+	Artists, err := apimanager.GetArtists()
 	if err != nil {
 		log.Printf("Error getting artists: %s", err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
+	FullArtists = Artists
+}
+func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	artists := FullArtists
 	// Set the Content-Type header before writing to the response writer
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if r.URL.Path == "/" {
-		err = templates.ExecuteTemplate(w, "artists.html", artists)
+		err := templates.ExecuteTemplate(w, "artists.html", artists)
 		if err != nil {
 			log.Printf("Error executing template: %s", err.Error())
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
